@@ -13,5 +13,5 @@ packages_required = ['pyvisa',
                      'bitstring',
                      'opencv-python',
                      'harvesters', #for genicam compliant cameras
-                     'git+https://github.com/morefigs/py-ic-imaging-control'] #for the imaging source cameras (should be updated using manufacturer set of python functions
+                 ]
 ##
