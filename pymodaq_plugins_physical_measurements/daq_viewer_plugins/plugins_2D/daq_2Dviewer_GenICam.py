@@ -18,7 +18,8 @@ from PyQt5 import QtWidgets
 import numpy as np
 import ctypes
 from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base
-import pymodaq.daq_utils.custom_parameter_tree as custom_tree
+from pymodaq.daq_utils.parameter import utils as putils
+
 from easydict import EasyDict as edict
 from collections import OrderedDict
 from pymodaq.daq_utils.daq_utils import ThreadCommand, getLineInfo, recursive_find_files_extension, DataFromPlugins, Axis
@@ -148,7 +149,7 @@ class DAQ_2DViewer_GenICam(DAQ_Viewer_base):
             set_Mock_data
         """
         try:
-            if param.name() in custom_tree.iter_children(self.settings.child(('cam_settings')),[]):
+            if param.name() in putils.iter_children(self.settings.child(('cam_settings')), []):
 
                 self.stop()
                 while self.controller.is_acquiring_images:
@@ -177,7 +178,7 @@ class DAQ_2DViewer_GenICam(DAQ_Viewer_base):
 
 
 
-            if param.name() in custom_tree.iter_children(self.settings.child(('ROIselect')),[]):
+            if param.name() in putils.iter_children(self.settings.child(('ROIselect')),[]):
 
                 while self.controller.is_acquiring_images:
                     QThread.msleep(50)
@@ -190,7 +191,7 @@ class DAQ_2DViewer_GenICam(DAQ_Viewer_base):
             self.emit_status(ThreadCommand('Update_Status', [getLineInfo()+ str(e), 'log']))
 
     def set_ROI(self):
-        params = custom_tree.iter_children_params(self.settings.child(('cam_settings')), [])
+        params = putils.iter_children_params(self.settings.child(('cam_settings')), [])
         param_names = [param.name() for param in params]
 
         if self.settings.child('ROIselect', 'use_ROI').value():
@@ -257,7 +258,7 @@ class DAQ_2DViewer_GenICam(DAQ_Viewer_base):
 
     def update_features(self):
         #start = time.perf_counter()
-        for child in custom_tree.iter_children_params(self.settings.child(('cam_settings')),[]):
+        for child in putils.iter_children_params(self.settings.child(('cam_settings')),[]):
             try:
                 if self.controller.device.node_map.get_node(child.name()).get_access_mode() == 0:
                     child.setOpts(visible=False)
