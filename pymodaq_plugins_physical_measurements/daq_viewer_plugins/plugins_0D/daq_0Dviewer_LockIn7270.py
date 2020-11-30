@@ -14,9 +14,6 @@ from collections import OrderedDict
 import numpy as np
 from enum import IntEnum
 import re
-from pyqtgraph.parametertree import Parameter, ParameterTree
-import pyqtgraph.parametertree.parameterTypes as pTypes
-import pymodaq.daq_utils.parameter.pymodaq_ptypes
 from pymodaq.daq_viewer.utility_classes import comon_parameters
 
 class ReferenceModes(IntEnum):

@@ -19,7 +19,6 @@ import numpy as np
 import ctypes
 from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base
 from pymodaq.daq_utils.parameter import utils as putils
-
 from easydict import EasyDict as edict
 from collections import OrderedDict
 from pymodaq.daq_utils.daq_utils import ThreadCommand, getLineInfo, recursive_find_files_extension, DataFromPlugins, Axis
