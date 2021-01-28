@@ -61,6 +61,7 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
                 {'title': 'Model:', 'name': 'model', 'type': 'str', 'value': "" },
                 {'title': 'Timeout (ms):', 'name': 'timeout', 'type': 'int', 'value': 2000, 'default': 2000, 'min': 1000 },
                 {'title': 'Configuration:', 'name': 'config', 'type': 'group', 'children':[
+                    {'title': 'Reset:', 'name': 'reset', 'type': 'bool_push', 'value': False},
                     {'title': 'Channels in separate viewer:', 'name': 'separate_viewers', 'type': 'bool', 'value': True },
                     {'title': 'Channels:', 'name': 'channels', 'type': 'itemselect', 'value': dict(all_items=channels, selected=['MAG', 'PHA']) },
                     {'title': 'Setup:', 'name': 'setup', 'type': 'group', 'children': [
@@ -138,7 +139,7 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
             if len(idn) >= 2:
                 self.settings.child(('serial_number')).setValue(idn[2])
 
-            self.reset()
+            #self.reset()
 
             self.status.controller=self.controller
             self.status.initialized=True
@@ -215,6 +216,9 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
                     self.data_grabed_signal_temp.emit(data_init)
                 else:
                     self.data_grabed_signal_temp.emit([DataFromPlugins(name='SR830', data=data_init, dim='Data0D')])
+            elif param.name() == 'reset':
+                self.reset()
+                param.setValue(False)
 
         except Exception as e:
             self.emit_status(ThreadCommand('Update_Status',[getLineInfo()+ str(e),'log']))
@@ -226,4 +230,6 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
         """
         self.controller.close()
 
+    def stop(self):
+        pass
 

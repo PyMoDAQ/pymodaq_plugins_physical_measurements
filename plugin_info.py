@@ -12,6 +12,6 @@ author_email = 'sebastien.weber@cemes.fr'
 packages_required = ['pyvisa',
                      'bitstring',
                      'opencv-python',
-                     'harvesters', #for genicam compliant cameras
+                     #'harvesters', #for genicam compliant cameras
                  ]
 ##
