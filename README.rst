@@ -54,4 +54,14 @@ Viewer2D
 * **GenICam**: GeniCam compliant cameras suing the harvester libary
 * **TIS**: The Imaging Source TIS cameras
 
+Installation instructions for the Lecroy plugin
+===============================================
+
+You will also need to install the following softwares.
+Follow the link to get the installers.
+
+Lecroy ActiveDSO: https://teledynelecroy.com/support/softwaredownload/activedso.aspx?capid=106&mid=533&smid=
+
+NI-VISA: https://www.ni.com/fr-fr/support/downloads/drivers/download.ni-visa.html#305862
+
 
