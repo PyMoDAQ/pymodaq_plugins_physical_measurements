@@ -173,7 +173,6 @@ class DAQ_1DViewer_LecroyWaverunner(DAQ_Viewer_base):
                     r"""vbs? 'return=app.acquisition.horizontal.acquiredsegments' """,
                     1)
                 acquired_segments = self.controller.ReadString(8)
-                # print(acquiredSegments)
                 if acquired_segments == self.number_of_segments:
                     break
 
