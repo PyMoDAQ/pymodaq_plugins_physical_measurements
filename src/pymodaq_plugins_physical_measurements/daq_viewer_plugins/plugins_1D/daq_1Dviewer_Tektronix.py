@@ -40,7 +40,7 @@ class DAQ_1DViewer_Tektronix(DAQ_Viewer_base):
 
     def __init__(self,parent=None,params_state=None):
         super(DAQ_1DViewer_Tektronix,self).__init__(parent,params_state)
-        from visa import ResourceManager
+        from pyvisa import ResourceManager
         self.VISA_rm=ResourceManager()
         self.controller=None
 

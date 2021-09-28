@@ -62,7 +62,7 @@ class DAQ_0DViewer_Keithley_Pico(DAQ_Viewer_base):
 
     def __init__(self,parent=None,params_state=None):
         super(DAQ_0DViewer_Keithley_Pico,self).__init__(parent,params_state)
-        from visa import ResourceManager
+        from pyvisa import ResourceManager
         self.VISA_rm=ResourceManager()
         self.controller=None
 
