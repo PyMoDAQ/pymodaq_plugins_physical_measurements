@@ -1,9 +1,8 @@
-from PyQt5.QtCore import QThread
+
+from sys import platform
 import numpy as np
-import pymodaq.daq_utils.daq_utils as mylib
-from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base
+from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base, main
 from easydict import EasyDict as edict
-from collections import OrderedDict
 from pymodaq.daq_utils.daq_utils import ThreadCommand, getLineInfo, DataFromPlugins, Axis
 from pymodaq.daq_viewer.utility_classes import comon_parameters
 
@@ -120,14 +119,14 @@ class DAQ_2DViewer_OpenCVCam(DAQ_Viewer_base):
         try:
             if param.name() == 'open_settings':
                 if param.value():
-                    self.controller.set(OpenCVProp['CV_CAP_PROP_SETTINGS'].value, 0)
+                    self.controller.set(OpenCVProp['CV_CAP_PROP_SETTINGS'].value, 1)
                     #param.setValue(False)
             elif param.name() == 'colors':
                 pass
             else:
                 self.controller.set(OpenCVProp['CV_CAP_' + param.name()].value, param.value())
                 val = self.controller.get(OpenCVProp['CV_CAP_' + param.name()].value)
-                param.setValue(int(val))
+                param.setValue(val)
 
         except Exception as e:
             self.emit_status(ThreadCommand('Update_Status', [getLineInfo() + str(e), 'log']))
@@ -149,9 +148,12 @@ class DAQ_2DViewer_OpenCVCam(DAQ_Viewer_base):
                 else:
                     self.controller = controller
             else:
-                self.controller = cv2.VideoCapture(self.settings.child(('camera_index')).value())
+                if 'win' in platform:
+                    self.controller = cv2.VideoCapture(self.settings.child(('camera_index')).value(), cv2.CAP_DSHOW)
+                else:
+                    self.controller = cv2.VideoCapture(self.settings.child(('camera_index')).value())
 
-            self.controller.set(OpenCVProp['CV_CAP_PROP_AUTO_EXPOSURE'].value, 1)
+            #self.controller.set(OpenCVProp['CV_CAP_PROP_AUTO_EXPOSURE'].value, 1)
             self.get_active_properties() #to add settable settings to the param list (but driver builtin settings window is prefered (OpenCVProp['CV_CAP_PROP_SETTINGS'])
 
             self.x_axis = self.get_xaxis()
@@ -181,7 +183,7 @@ class DAQ_2DViewer_OpenCVCam(DAQ_Viewer_base):
                     except:
                         ret_set = False
                     self.additional_params.append(
-                        {'title': prop[7:], 'name': prop[7:], 'type': 'int', 'value': ret, 'readonly': not ret_set})
+                        {'title': prop[7:], 'name': prop[7:], 'type': 'float', 'value': ret, 'readonly': not ret_set})
             except:
                 pass
         self.settings.child('cam_settings').addChildren(self.additional_params)
@@ -280,3 +282,6 @@ class DAQ_2DViewer_OpenCVCam(DAQ_Viewer_base):
         """
 
         return ""
+
+if __name__ == '__main__':
+    main(__file__, init=False)
