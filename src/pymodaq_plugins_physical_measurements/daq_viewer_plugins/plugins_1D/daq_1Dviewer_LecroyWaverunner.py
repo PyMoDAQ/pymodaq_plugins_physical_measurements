@@ -1,5 +1,5 @@
-from PyQt5.QtCore import pyqtSignal, QThread
-from PyQt5 import QtWidgets
+from qtpy.QtCore import Signal, QThread
+from qtpy import QtWidgets
 import numpy as np
 import time
 from easydict import EasyDict as edict

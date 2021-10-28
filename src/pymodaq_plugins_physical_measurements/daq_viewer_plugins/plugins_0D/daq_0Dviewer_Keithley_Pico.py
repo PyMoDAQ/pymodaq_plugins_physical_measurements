@@ -1,4 +1,4 @@
-from PyQt5.QtCore import pyqtSignal
+from qtpy.QtCore import Signal
 from easydict import EasyDict as edict
 from pymodaq.daq_utils.daq_utils import ThreadCommand, getLineInfo, DataFromPlugins
 from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base
@@ -30,7 +30,7 @@ class DAQ_0DViewer_Keithley_Pico(DAQ_Viewer_base):
     """
         ==================== ========================
         **Attributes**        **Type**
-        *data_grabed_signal*  instance of pyqtSignal
+        *data_grabed_signal*  instance of Signal
         *VISA_rm*             ResourceManager
         *com_ports*           
         *params*              dictionnary list
@@ -38,7 +38,7 @@ class DAQ_0DViewer_Keithley_Pico(DAQ_Viewer_base):
         *settings*
         ==================== ========================
     """
-    data_grabed_signal=pyqtSignal(list)
+    data_grabed_signal=Signal(list)
 
     ##checking VISA ressources
 

@@ -7,8 +7,8 @@ This module only works on Windows due to wrapping a DLL. Tested on Windows 7 wit
 """
 
 import os
-from PyQt5.QtCore import QThread
-from PyQt5 import QtWidgets
+from qtpy.QtCore import QThread
+from qtpy import QtWidgets
 import numpy as np
 import ctypes
 import pymodaq.daq_utils.daq_utils as mylib

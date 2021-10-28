@@ -5,7 +5,7 @@ Created on Tue Mar 28 09:24:55 2017
 @author: Weber
 """
 
-from PyQt5.QtCore import QObject, pyqtSignal, QThread
+from qtpy.QtCore import QObject, Signal, QThread
 import ctypes
 from ctypes.util import find_library
 import numpy as np
@@ -85,8 +85,8 @@ class Picoscope_5000A(QObject):
     """
     Initialize an object to control the picoscope. It uses ctypes library and the .dll or .so dynamic libraries
     """
-    overflow_signal=pyqtSignal(int) #triggered when there is an voltage overflow on one of the channels
-    data_ready_signal=pyqtSignal()
+    overflow_signal=Signal(int) #triggered when there is an voltage overflow on one of the channels
+    data_ready_signal=Signal()
     max_delay=8388607 #☻from pico5000aAPI.h
     def __init__(self):
         super(Picoscope_5000A,self).__init__()

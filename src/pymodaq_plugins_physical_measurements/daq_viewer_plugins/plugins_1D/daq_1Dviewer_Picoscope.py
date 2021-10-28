@@ -1,4 +1,4 @@
-from PyQt5.QtCore import pyqtSlot, QThread
+from qtpy.QtCore import Slot, QThread
 from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base
 import numpy as np
 from easydict import EasyDict as edict
@@ -331,7 +331,7 @@ class DAQ_1DViewer_Picoscope(DAQ_Viewer_base):
 
 
 
-    @pyqtSlot(int)
+    @Slot(int)
     def set_overflow(self,ind):
         """
             =============== ========== ==========================================================================================
@@ -426,7 +426,7 @@ class DAQ_1DViewer_Picoscope(DAQ_Viewer_base):
             self.emit_status(ThreadCommand("Update_Status",[getLineInfo()+ str(e),'log']))
 
 
-    @pyqtSlot()
+    @Slot()
     def data_ready(self):
         """ 
             | Cast the raw data (from Picoscope's communication channel) to export considering time axis in ms.

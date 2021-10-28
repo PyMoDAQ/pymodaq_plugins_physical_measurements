@@ -5,7 +5,7 @@ Created on Thu Jun 14 15:14:54 2018
 @author: Weber Sébastien
 @email: seba.weber@gmail.com
 """
-from PyQt5.QtCore import pyqtSignal
+from qtpy.QtCore import Signal
 from easydict import EasyDict as edict
 from pymodaq.daq_utils.daq_utils import ThreadCommand, getLineInfo, DataFromPlugins
 from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base
@@ -72,7 +72,7 @@ class DAQ_0DViewer_LockIn7270(DAQ_Viewer_base):
     """
         ==================== ========================
         **Attributes**        **Type**
-        *data_grabed_signal*  instance of pyqtSignal
+        *data_grabed_signal*  instance of Signal
         *VISA_rm*             ResourceManager
         *com_ports*           
         *params*              dictionnary list
@@ -80,7 +80,7 @@ class DAQ_0DViewer_LockIn7270(DAQ_Viewer_base):
         *settings*
         ==================== ========================
     """
-    data_grabed_signal=pyqtSignal(list)
+    data_grabed_signal=Signal(list)
     channels_single_mode=['X', 'Y', 'MAG', 'PHA']
     channels_dual_mode=['X1', 'Y1', 'MAG1', 'PHA1', 'X2', 'Y2', 'MAG2', 'PHA2']
 

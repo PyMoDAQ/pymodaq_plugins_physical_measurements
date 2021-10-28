@@ -13,8 +13,8 @@ Once installed, activate your camera using mvDeviceConfigure
 
 import time
 import os
-from PyQt5.QtCore import QThread
-from PyQt5 import QtWidgets
+from qtpy.QtCore import QThread
+from qtpy import QtWidgets
 import numpy as np
 import ctypes
 from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base
