@@ -26,7 +26,7 @@ class DAQ_1DViewer_Picoscope(DAQ_Viewer_base):
     hardware_averaging=False
     params= comon_parameters+[
              {'title': 'Main Settings:','name': 'main_settings', 'type': 'group', 'children':[
-                {'title': 'Dynamic:','name': 'dynamic', 'type': 'list', 'values': picoscope.DAQ_Picoscope_dynamic.names()},
+                {'title': 'Dynamic:','name': 'dynamic', 'type': 'list', 'limits': picoscope.DAQ_Picoscope_dynamic.names()},
                 {'title': 'N segments:','name': 'Nsegments', 'type': 'int', 'value': 1 , 'default': 1},
                 {'title': 'Temporal:','name': 'temporal', 'type': 'group', 'children':[
                     {'title': 'Window (ms):','name': 'window', 'type': 'float', 'value': 100 , 'default': 100},
@@ -36,8 +36,8 @@ class DAQ_1DViewer_Picoscope(DAQ_Viewer_base):
                 
                 {'title': 'Trigger:','name': 'trigger', 'type': 'group', 'children':[
                     {'title': 'Enable trigger:','name': 'trig_enabled', 'type': 'bool','value': True},
-                    {'title': 'Channel:','name': 'trig_channel', 'type': 'list','values': picoscope.DAQ_Picoscope_trigger_channel.names()},
-                    {'title': 'Type:','name': 'trig_type', 'type': 'list', 'value': 'Rising', 'values': picoscope.DAQ_Picoscope_trigger_type.names()},
+                    {'title': 'Channel:','name': 'trig_channel', 'type': 'list','limits': picoscope.DAQ_Picoscope_trigger_channel.names()},
+                    {'title': 'Type:','name': 'trig_type', 'type': 'list', 'value': 'Rising', 'limits': picoscope.DAQ_Picoscope_trigger_type.names()},
                     {'title': 'Level (V):','name': 'trig_level', 'type': 'float', 'value': 0, 'suffix': 'V'},
                     {'title': 'Pretrigger (%):','name': 'trig_pretrigger', 'type': 'int', 'value': 50, 'suffix': '%'},
                     {'title': 'Trigger delay (ms):','name': 'trig_delay', 'type': 'float', 'value': 0},
@@ -47,29 +47,29 @@ class DAQ_1DViewer_Picoscope(DAQ_Viewer_base):
             {'title': 'Channels:','name': 'channels', 'type': 'group', 'children':[
                 {'title': 'ChA:','name': 'ChA', 'type': 'group', 'children':[
                         {'title': 'Active?:','name': 'active', 'type': 'bool','value': True},
-                        {'title': 'Range:','name': 'range', 'type': 'list','value': '200mV', 'values': picoscope.DAQ_Picoscope_range.names()},
-                        {'title': 'Coupling:','name': 'coupling', 'type': 'list','values': picoscope.DAQ_Picoscope_coupling.names()},
+                        {'title': 'Range:','name': 'range', 'type': 'list','value': '200mV', 'limits': picoscope.DAQ_Picoscope_range.names()},
+                        {'title': 'Coupling:','name': 'coupling', 'type': 'list','limits': picoscope.DAQ_Picoscope_coupling.names()},
                         {'title': 'Analog offset (V):','name': 'offset', 'type': 'float','value': 0},
                         {'title': 'Overflow:','name': 'overflow', 'type': 'led','value': False},
                 ]},
                 {'title': 'ChB:','name': 'ChB', 'type': 'group', 'children':[
                         {'title': 'Active?:','name': 'active', 'type': 'bool','value': False},
-                        {'title': 'Range:','name': 'range', 'type': 'list','value': '200mV', 'values': picoscope.DAQ_Picoscope_range.names()},
-                        {'title': 'Coupling:','name': 'coupling', 'type': 'list','values': picoscope.DAQ_Picoscope_coupling.names()},
+                        {'title': 'Range:','name': 'range', 'type': 'list','value': '200mV', 'limits': picoscope.DAQ_Picoscope_range.names()},
+                        {'title': 'Coupling:','name': 'coupling', 'type': 'list','limits': picoscope.DAQ_Picoscope_coupling.names()},
                         {'title': 'Analog offset (V):','name': 'offset', 'type': 'float','value': 0},
                         {'title': 'Overflow:','name': 'overflow', 'type': 'led','value': False},
                 ]},
                 {'title': 'ChC:','name': 'ChC', 'type': 'group', 'children':[
                         {'title': 'Active?:','name': 'active', 'type': 'bool','value': False},
-                        {'title': 'Range:','name': 'range', 'type': 'list','value': '200mV', 'values': picoscope.DAQ_Picoscope_range.names()},
-                        {'title': 'Coupling:','name': 'coupling', 'type': 'list','values': picoscope.DAQ_Picoscope_coupling.names()},
+                        {'title': 'Range:','name': 'range', 'type': 'list','value': '200mV', 'limits': picoscope.DAQ_Picoscope_range.names()},
+                        {'title': 'Coupling:','name': 'coupling', 'type': 'list','limits': picoscope.DAQ_Picoscope_coupling.names()},
                         {'title': 'Analog offset (V):','name': 'offset', 'type': 'float','value': 0},
                         {'title': 'Overflow:','name': 'overflow', 'type': 'led','value': False},
                 ]},
                 {'title': 'ChD:','name': 'ChD', 'type': 'group', 'children':[
                         {'title': 'Active?:','name': 'active', 'type': 'bool','value': False},
-                        {'title': 'Range:','name': 'range', 'type': 'list','value': '200mV', 'values': picoscope.DAQ_Picoscope_range.names()},
-                        {'title': 'Coupling:','name': 'coupling', 'type': 'list','values': picoscope.DAQ_Picoscope_coupling.names()},
+                        {'title': 'Range:','name': 'range', 'type': 'list','value': '200mV', 'limits': picoscope.DAQ_Picoscope_range.names()},
+                        {'title': 'Coupling:','name': 'coupling', 'type': 'list','limits': picoscope.DAQ_Picoscope_coupling.names()},
                         {'title': 'Analog offset (V):','name': 'offset', 'type': 'float','value': 0},
                         {'title': 'Overflow:','name': 'overflow', 'type': 'led','value': False},
                 ]}

@@ -55,7 +55,7 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
         raise e
 
     params= comon_parameters+[
-                {'title': 'VISA:','name': 'VISA_ressources', 'type': 'list', 'values': devices, 'value': device },
+                {'title': 'VISA:','name': 'VISA_ressources', 'type': 'list', 'limits': devices, 'value': device },
                 {'title': 'Manufacturer:', 'name': 'manufacturer', 'type': 'str', 'value': "" },
                 {'title': 'Serial number:', 'name': 'serial_number', 'type': 'str', 'value': "" },
                 {'title': 'Model:', 'name': 'model', 'type': 'str', 'value': "" },

@@ -84,7 +84,7 @@ class DAQ_2DViewer_OpenCVCam(DAQ_Viewer_base):
     """
 
     params= comon_parameters+[{'title': 'Camera index:', 'name': 'camera_index', 'type': 'int', 'value': 0 , 'default':0, 'min': 0},
-                              {'title': 'Colors:', 'name': 'colors', 'type': 'list', 'value': 'gray' , 'values': ['gray','RGB']},
+                              {'title': 'Colors:', 'name': 'colors', 'type': 'list', 'value': 'gray' , 'limits': ['gray','RGB']},
                               {'title': 'Open Settings:', 'name': 'open_settings', 'type': 'bool', 'value': False },
                               {'title': 'Cam. Settings:', 'name': 'cam_settings', 'type': 'group', 'children': [
                               #     {'title': 'Autoexposure:', 'name': 'autoexposure', 'type': 'bool', 'value': False},

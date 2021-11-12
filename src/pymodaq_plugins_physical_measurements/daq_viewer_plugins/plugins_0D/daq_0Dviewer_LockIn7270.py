@@ -95,13 +95,13 @@ class DAQ_0DViewer_LockIn7270(DAQ_Viewer_base):
         devices=[]
 
     params= comon_parameters+[
-                {'title': 'VISA:','name': 'VISA_ressources', 'type': 'list', 'values': devices },
+                {'title': 'VISA:','name': 'VISA_ressources', 'type': 'list', 'limits': devices },
                 {'title': 'Manufacturer:', 'name': 'manufacturer', 'type': 'str', 'value': "" },
                 {'title': 'Serial number:', 'name': 'serial_number', 'type': 'str', 'value': "" },
                 {'title': 'Model:', 'name': 'model', 'type': 'str', 'value': "" },
                 {'title': 'Timeout (ms):', 'name': 'timeout', 'type': 'int', 'value': 2000, 'default': 2000, 'min': 1000 },
                 {'title': 'Configuration:', 'name': 'config', 'type': 'group', 'children':[
-                {'title': 'Mode:', 'name': 'mode', 'type': 'list', 'values': ReferenceModes.names() },
+                {'title': 'Mode:', 'name': 'mode', 'type': 'list', 'limits': ReferenceModes.names() },
                 {'title': 'Channels in separate viewer:', 'name': 'separate_viewers', 'type': 'bool', 'value': True },
                 {'title': 'Channels:', 'name': 'channels', 'type': 'itemselect', 'value': dict(all_items=channels_single_mode,selected=['MAG', 'PHA']) },
                 ] },

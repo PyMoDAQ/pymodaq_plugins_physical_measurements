@@ -61,7 +61,7 @@ class DAQ_1DViewer_LecroyWaverunner(DAQ_Viewer_base):
             {'title': 'VISA:',
              'name': 'VISA_ressources',
              'type': 'list',
-             'values': resources},
+             'limits': resources},
             {'title': 'Channels:',
              'name': 'channels',
              'type': 'itemselect',

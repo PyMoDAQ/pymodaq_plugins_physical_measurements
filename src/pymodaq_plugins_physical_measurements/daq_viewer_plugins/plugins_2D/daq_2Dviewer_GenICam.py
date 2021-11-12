@@ -76,7 +76,7 @@ class DAQ_2DViewer_GenICam(DAQ_Viewer_base):
     devices_names = [device.model for device in devices]
 
     params = comon_parameters+\
-            [{'title': 'Cam. names:', 'name': 'cam_name', 'type': 'list', 'values': devices_names},
+            [{'title': 'Cam. names:', 'name': 'cam_name', 'type': 'list', 'limits': devices_names},
              {'title': 'Cam. Prop.:', 'name': 'cam_settings', 'type': 'group', 'children': []},
             ]
 
@@ -305,7 +305,7 @@ class DAQ_2DViewer_GenICam(DAQ_Viewer_base):
 
                     elif interface_type == EInterfaceType.intfIEnumeration:
                         item.update({'type': 'list', 'value': feature.value,
-                                     'values': [f.node.display_name for f in feature.entries],
+                                     'limits': [f.node.display_name for f in feature.entries],
                                      'readonly': feature.get_access_mode() in [0, 1, 3],
                                      'enabled': not(feature.get_access_mode() in [0, 1, 3])
                                      })

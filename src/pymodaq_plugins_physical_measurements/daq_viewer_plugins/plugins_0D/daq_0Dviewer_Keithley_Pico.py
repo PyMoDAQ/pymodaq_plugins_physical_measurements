@@ -49,12 +49,12 @@ class DAQ_0DViewer_Keithley_Pico(DAQ_Viewer_base):
 #    com_ports=[comport.device for comport in serial.tools.list_ports.comports()]
 
     params= comon_parameters+[
-              {'title': 'VISA:','name': 'VISA_ressources', 'type': 'list', 'values': com_ports },
-             {'title': 'Keithley Type:','name': 'keithley_type', 'type': 'list', 'values': DAQ_0DViewer_Keithley_Pico_type.names()},
+              {'title': 'VISA:','name': 'VISA_ressources', 'type': 'list', 'limits': com_ports },
+             {'title': 'Keithley Type:','name': 'keithley_type', 'type': 'list', 'limits': DAQ_0DViewer_Keithley_Pico_type.names()},
              {'title': 'Id:', 'name': 'id', 'type': 'text', 'value': "" },
              {'title': 'Timeout (ms):', 'name': 'timeout', 'type': 'int', 'value': 10000, 'default': 10000, 'min': 2000 },
              {'title': 'Configuration:', 'name': 'config', 'type': 'group', 'children':[
-                 {'title': 'Meas. type:', 'name': 'meas_type', 'type': 'list', 'value': 'CURR', 'default': 'CURR', 'values': ['CURR','VOLT','RES','CHAR'] },
+                 {'title': 'Meas. type:', 'name': 'meas_type', 'type': 'list', 'value': 'CURR', 'default': 'CURR', 'limits': ['CURR','VOLT','RES','CHAR'] },
 
 
                  ] },

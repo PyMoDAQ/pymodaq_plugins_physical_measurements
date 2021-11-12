@@ -44,7 +44,7 @@ class DAQ_2DViewer_TIS(DAQ_Viewer_base):
     cameras = [cam.decode() for cam in ic.get_unique_device_names()]
 
     params = comon_parameters + \
-             [{'title': 'Cam. names:', 'name': 'cam_name', 'type': 'list', 'values': cameras},
+             [{'title': 'Cam. names:', 'name': 'cam_name', 'type': 'list', 'limits': cameras},
               {'title': 'Video Formats:', 'name': 'video_formats', 'type': 'list'},
               {'title': 'Gray scale:', 'name': 'gray_scale', 'type': 'bool', 'value': False},
               {'title': 'Cam. Prop.:', 'name': 'cam_settings', 'type': 'group', 'children': [

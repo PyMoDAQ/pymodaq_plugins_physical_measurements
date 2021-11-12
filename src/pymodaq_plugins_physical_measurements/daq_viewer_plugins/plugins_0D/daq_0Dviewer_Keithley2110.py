@@ -18,7 +18,7 @@ class DAQ_0DViewer_Keithley2110(DAQ_Viewer_base):
     """
     params = comon_parameters+[
         {'title': 'Keithley2210 Parameters',  'name': 'K2110Params', 'type': 'group', 'children': [
-            {'title': 'Mode', 'name': 'mode', 'type': 'list', 'values': ['VDC', 'VAC', 'R2W', 'R4W'], 'value': 'VDC'}
+            {'title': 'Mode', 'name': 'mode', 'type': 'list', 'limits': ['VDC', 'VAC', 'R2W', 'R4W'], 'value': 'VDC'}
 
         ]}
     ]
