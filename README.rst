@@ -37,6 +37,7 @@ Viewer0D
 
 * **Keithley_Pico**: Pico-Amperemeter Keithley 648X Series, 6430 and 6514
 * **Keithley2110**: Multimeter Keithley  2110
+* **Keithley2400**: Sourcemeter Keithley  2400 (using pymeasure intermediate package)
 * **Lockin7270**: Lockin Amplifier Ametek 7270
 * **LockinSR830**: LockIn Amplifier SR830
 
