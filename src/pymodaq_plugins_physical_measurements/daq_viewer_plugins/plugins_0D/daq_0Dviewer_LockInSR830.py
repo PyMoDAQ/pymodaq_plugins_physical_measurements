@@ -66,41 +66,40 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
                         {'title': 'Setup number:', 'name': 'setup_number', 'type': 'int', 'value': 0},
                         {'title': 'Save setup:', 'name': 'save_setup', 'type': 'bool', 'value': False},
                         {'title': 'Load setup:', 'name': 'load_setup', 'type': 'bool', 'value': False},]}
-                ] },
-            ]
-    def __init__(self,parent=None,params_state=None):
-        super(DAQ_0DViewer_LockInSR830,self).__init__(parent,params_state)
-        self.controller=None
+                ]},
+    ]
 
+    def __init__(self, parent=None, params_state=None):
+        super().__init__(parent, params_state)
+        self.controller = None
 
-    def query_data(self,cmd):
+    def query_data(self, cmd):
         try:
-            res=self.controller.query(cmd)
-            searched=re.search('\n',res)
-            status_byte=res[searched.start()+1]
-            overload_byte=res[searched.start()+3]
-            if searched.start!=0:
-                data=np.array([float(x) for x in res[0:searched.start()].split(",")])
+            res = self.controller.query(cmd)
+            searched = re.search('\n', res)
+            status_byte = res[searched.start() + 1]
+            overload_byte = res[searched.start() + 3]
+            if searched.start != 0:
+                data = np.array([float(x) for x in res[0:searched.start()].split(",")])
             else:
-                data=None
-            return (status_byte,overload_byte,data)
+                data = None
+            return (status_byte, overload_byte, data)
         except:
-            return ('\x01','\x00',None)
-        
+            return ('\x01', '\x00', None)
 
-    def query_string(self,cmd):
+    def query_string(self, cmd):
         try:
-            res=self.controller.query(cmd)
-            searched=re.search('\n',res)
-            status_byte=res[searched.start()+1]
-            overload_byte=res[searched.start()+3]
-            if searched.start!=0:
-                str=res[0:searched.start()]
+            res = self.controller.query(cmd)
+            searched = re.search('\n', res)
+            status_byte = res[searched.start() + 1]
+            overload_byte = res[searched.start() + 3]
+            if searched.start != 0:
+                str = res[0:searched.start()]
             else:
-                str=""
-            return (status_byte,overload_byte,str)
+                str = ""
+            return (status_byte, overload_byte, str)
         except:
-            return ('\x01','\x00',"")
+            return ('\x01', '\x00', "")
 
     def ini_detector(self, controller=None):
         """
@@ -115,38 +114,38 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
             --------
             daq_utils.ThreadCommand
         """
-        self.status.update(edict(initialized=False,info="",x_axis=None,y_axis=None,controller=None))
+        self.status.update(edict(initialized=False, info="", x_axis=None, y_axis=None, controller=None))
         try:
 
-            if self.settings.child(('controller_status')).value()=="Slave":
-                if controller is None: 
+            if self.settings.child(('controller_status')).value() == "Slave":
+                if controller is None:
                     raise Exception('no controller has been defined externally while this detector is a slave one')
                 else:
-                    self.controller=controller
+                    self.controller = controller
             else:
-                self.controller=self.VISA_rm.open_resource(self.settings.child(('VISA_ressources')).value())
+                self.controller = self.VISA_rm.open_resource(self.settings.child(('VISA_ressources')).value())
 
-            self.controller.timeout=self.settings.child(('timeout')).value()
+            self.controller.timeout = self.settings.child(('timeout')).value()
             idn = self.controller.query('OUTX1;*IDN?;')
             idn = idn.rstrip('\n')
             idn = idn.rsplit(',')
-            if len(idn)>=0:
+            if len(idn) >= 0:
                 self.settings.child(('manufacturer')).setValue(idn[0])
             if len(idn) >= 1:
                 self.settings.child(('model')).setValue(idn[1])
             if len(idn) >= 2:
                 self.settings.child(('serial_number')).setValue(idn[2])
 
-            #self.reset()
+            # self.reset()
 
-            self.status.controller=self.controller
-            self.status.initialized=True
+            self.status.controller = self.controller
+            self.status.initialized = True
             return self.status
 
         except Exception as e:
-            self.emit_status(ThreadCommand('Update_Status',[getLineInfo()+ str(e),'log']))
-            self.status.info=getLineInfo()+ str(e)
-            self.status.initialized=False
+            self.emit_status(ThreadCommand('Update_Status', [getLineInfo() + str(e), 'log']))
+            self.status.info = getLineInfo() + str(e)
+            self.status.initialized = False
             return self.status
 
     def reset(self):
@@ -163,10 +162,10 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
             *Naverage*      int       Number of values to average
             =============== ======== ===============================================
         """
-        data_tot=[]
+        data_tot = []
         data = self.controller.query_ascii_values('SNAP ? 1,2,3,4,5,6')
         data.extend(self.controller.query_ascii_values('SNAP ? 7,8,9,10,11'))
-        selected_channels = self.settings.child('config','channels').value()['selected']
+        selected_channels = self.settings.child('config', 'channels').value()['selected']
         data_to_export = [np.array([data[ind]]) for ind in [self.channels.index(sel) for sel in selected_channels]]
 
         if self.settings.child('config', 'separate_viewers').value():
@@ -175,8 +174,8 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
                                                 labels=[selected_channels[ind_channel]]))
             self.data_grabed_signal.emit(data_tot)
         else:
-            self.data_grabed_signal.emit([DataFromPlugins(name='SR830',data=data_to_export, dim='Data0D', labels=selected_channels)])
-
+            self.data_grabed_signal.emit(
+                [DataFromPlugins(name='SR830', data=data_to_export, dim='Data0D', labels=selected_channels)])
 
     def commit_settings(self, param):
         """
@@ -192,25 +191,27 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
             daq_utils.ThreadCommand
         """
         try:
-            if param.name()=='timeout':
-                self.controller.timeout=self.settings.child(('timeout')).value()
+            if param.name() == 'timeout':
+                self.controller.timeout = self.settings.child(('timeout')).value()
 
             if param.name() == 'load_setup':
-                self.controller.write('RSET{:d};'.format(self.settings.child('config', 'setup', 'setup_number').value()))
+                self.controller.write(
+                    'RSET{:d};'.format(self.settings.child('config', 'setup', 'setup_number').value()))
                 param.setValue(False)
 
             if param.name() == 'save_setup':
-                self.controller.write('SSET{:d};'.format(self.settings.child('config', 'setup', 'setup_number').value()))
+                self.controller.write(
+                    'SSET{:d};'.format(self.settings.child('config', 'setup', 'setup_number').value()))
                 param.setValue(False)
 
-            elif param.name()=='channels':
-                data_init=[]
+            elif param.name() == 'channels':
+                data_init = []
                 for channel in param.value()['selected']:
-                    if self.settings.child('config','separate_viewers').value():
+                    if self.settings.child('config', 'separate_viewers').value():
                         data_init.append(DataFromPlugins(name=channel, data=[np.array([0])], dim='Data0D'))
                     else:
                         data_init.append(np.array([0]))
-                if self.settings.child('config','separate_viewers').value():
+                if self.settings.child('config', 'separate_viewers').value():
                     self.data_grabed_signal_temp.emit(data_init)
                 else:
                     self.data_grabed_signal_temp.emit([DataFromPlugins(name='SR830', data=data_init, dim='Data0D')])
@@ -219,8 +220,7 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
                 param.setValue(False)
 
         except Exception as e:
-            self.emit_status(ThreadCommand('Update_Status',[getLineInfo()+ str(e),'log']))
-
+            self.emit_status(ThreadCommand('Update_Status', [getLineInfo() + str(e), 'log']))
 
     def close(self):
         """
@@ -230,4 +230,3 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
 
     def stop(self):
         pass
-
