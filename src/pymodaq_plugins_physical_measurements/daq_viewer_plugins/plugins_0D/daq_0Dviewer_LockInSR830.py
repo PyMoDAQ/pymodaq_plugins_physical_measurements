@@ -40,18 +40,16 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
     ##checking VISA ressources
     try:
         from pyvisa import ResourceManager
-        VISA_rm=ResourceManager()
-        devices=list(VISA_rm.list_resources())
+        VISA_rm = ResourceManager()
+        devices = list(VISA_rm.list_resources())
         device = ''
         for dev in devices:
             if 'GPIB' in dev:
                 device = dev
                 break
-        
-       
     except Exception as e:
-        devices=[]
-        device=''
+        devices = []
+        device = ''
         raise e
 
     params= comon_parameters+[
