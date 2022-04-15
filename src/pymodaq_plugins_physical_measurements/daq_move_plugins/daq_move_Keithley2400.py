@@ -42,11 +42,11 @@ class DAQ_Move_Keithley2400(DAQ_Move_base):
                      {'title': 'Current Range:', 'name': 'current_range', 'type': 'float', 'value': 10e-3, 'min': 0.},
                      {'title': 'Compliance Voltage:', 'name': 'voltage_compliance', 'type': 'float',
                       'value': 10, 'min': 0.}]},
-                 {'title': 'Voltage Mode:', 'name': 'voltage_mode', 'type': 'group', 'visible': False, 'children': [
+                 {'title': 'Voltage Mode:', 'name': 'voltage_mode', 'type': 'group', 'visible': True, 'children': [
                      {'title': 'Voltage Range:', 'name': 'voltage_range', 'type': 'float', 'value': 10, 'min': 0.,
                       'max': 210.},
                      {'title': 'Compliance Current:', 'name': 'current_compliance', 'type': 'float',
-                      'value': 10e-3, 'min': 0.}]},
+                      'value': 5e-1, 'min': 0.}]},
 
                  {'title': 'MultiAxes:', 'name': 'multiaxes', 'type': 'group', 'visible': is_multiaxes, 'children': [
                      {'title': 'is Multiaxes:', 'name': 'ismultiaxes', 'type': 'bool', 'value': is_multiaxes,
@@ -80,20 +80,22 @@ class DAQ_Move_Keithley2400(DAQ_Move_base):
         -------
         float: The position obtained after scaling conversion.
         """
-        if self.enabled:
-            if self.settings.child('source_mode').value() == 'Current':
-                self.controller.measure_current()
-                pos = self.controller.current
-            else:
-                self.controller.measure_voltage()
-                pos = self.controller.voltage
-            if isinstance(pos, list):
-                logger.debug(f"Got multiple return values for {self.settings.child('source_mode').value()}"
-                             f": {pos}")
-                pos = pos[0]
-        else:
-            pos = 0.
+        # if self.enabled:
+        #     if self.settings.child('source_mode').value() == 'Current':
+        #         self.controller.measure_current()
+        #         pos = self.controller.current
+        #     else:
+        #         self.controller.measure_voltage()
+        #         pos = self.controller.voltage
+        #     if isinstance(pos, list):
+        #         logger.debug(f"Got multiple return values for {self.settings.child('source_mode').value()}"
+        #                      f": {pos}")
+        #         pos = pos[0]
+        # else:
+        #     pos = 0.
+        pos = self.current_position  # bypass checking
         pos = self.get_position_with_scaling(pos)
+
         self.emit_status(ThreadCommand('check_position', [pos]))
         return pos
 
@@ -143,14 +145,15 @@ class DAQ_Move_Keithley2400(DAQ_Move_base):
             if self.enabled:  # if was enabled, disabled it
                 self.enable_source(False)
             self.set_source(param.value(), *self.get_range_compliance())
-            self.settings.child('current_mode').show(param.value() == 'Current')
-            self.settings.child('voltage_mode').show(param.value() != 'Current')
-            if param.value() == 'Current':
-                self.controller.source_current = 0
-                self.controller.measure_voltage()
-            else:
-                self.controller.source_voltage = 0.
-                self.controller.measure_current()
+            if param.name() == "source_mode":
+                self.settings.child('current_mode').show(param.value() == 'Current')
+                self.settings.child('voltage_mode').show(param.value() != 'Current')
+                if param.value() == 'Current':
+                    self.controller.source_current = 0
+                    self.controller.measure_voltage()
+                else:
+                    self.controller.source_voltage = 0.
+                    self.controller.measure_current()
 
         elif param.name() == 'enabled':
             self.enable_source(param.value())
@@ -220,7 +223,17 @@ class DAQ_Move_Keithley2400(DAQ_Move_base):
         else:
             self.controller.source_voltage = position
 
+        if self.enabled:
+            if self.settings.child('source_mode').value() == 'Current':
+                self.controller.measure_voltage()
+                pos = self.controller.voltage
+            else:
+                self.controller.measure_current()
+                pos = self.controller.current
+
+
         self.target_position = position
+        self.current_position = self.target_position #bypass checking
 
     def move_Rel(self, position):
         """ Move the actuator to the relative target actuator value defined by position
