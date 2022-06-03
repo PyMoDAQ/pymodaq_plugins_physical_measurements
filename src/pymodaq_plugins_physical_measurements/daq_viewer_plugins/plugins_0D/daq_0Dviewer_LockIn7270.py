@@ -84,15 +84,14 @@ class DAQ_0DViewer_LockIn7270(DAQ_Viewer_base):
     channels_single_mode=['X', 'Y', 'MAG', 'PHA']
     channels_dual_mode=['X1', 'Y1', 'MAG1', 'PHA1', 'X2', 'Y2', 'MAG2', 'PHA2']
 
-
     ##checking VISA ressources
     try:
         from pyvisa import ResourceManager
-        VISA_rm=ResourceManager()
-        devices=list(VISA_rm.list_resources(query=u'?*::RAW'))
-       
+        VISA_rm = ResourceManager()
+        devices = list(VISA_rm.list_resources(query=u'?*::RAW'))
+
     except:
-        devices=[]
+        devices = []
 
     params= comon_parameters+[
                 {'title': 'VISA:','name': 'VISA_ressources', 'type': 'list', 'limits': devices },

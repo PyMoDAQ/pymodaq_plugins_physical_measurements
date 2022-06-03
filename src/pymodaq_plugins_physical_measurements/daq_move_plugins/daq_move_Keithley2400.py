@@ -19,6 +19,7 @@ SOURCE_MODES = ['Current', 'Voltage']
 EPSILON_CURRENT = 1e-5
 EPSILON_VOLTAGE = 1e-3
 
+
 class DAQ_Move_Keithley2400(DAQ_Move_base):
     """
         Wrapper object to access the Mock fonctionnalities, similar wrapper for all controllers.

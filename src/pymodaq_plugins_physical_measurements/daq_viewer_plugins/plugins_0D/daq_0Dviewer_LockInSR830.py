@@ -8,7 +8,7 @@ Created on Thu Jun 14 15:14:54 2018
 from qtpy.QtCore import Signal
 from easydict import EasyDict as edict
 from pymodaq.daq_utils.daq_utils import ThreadCommand, getLineInfo, DataFromPlugins
-from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base
+from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base, main
 from collections import OrderedDict
 
 import numpy as np
@@ -35,8 +35,6 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
     data_grabed_signal=Signal(list)
     channels=['X', 'Y', 'MAG', 'PHA', 'Aux In 1', 'Aux In 2', 'Aux In 3', 'Aux In 4', 'Ref frequency', 'CH1 display', 'CH2 display']
 
-
-
     ##checking VISA ressources
     try:
         from pyvisa import ResourceManager
@@ -52,7 +50,7 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
         device = ''
         raise e
 
-    params= comon_parameters+[
+    params = comon_parameters+[
                 {'title': 'VISA:','name': 'VISA_ressources', 'type': 'list', 'limits': devices, 'value': device },
                 {'title': 'Manufacturer:', 'name': 'manufacturer', 'type': 'str', 'value': "" },
                 {'title': 'Serial number:', 'name': 'serial_number', 'type': 'str', 'value': "" },
@@ -230,3 +228,7 @@ class DAQ_0DViewer_LockInSR830(DAQ_Viewer_base):
 
     def stop(self):
         pass
+
+
+if __name__ == '__main__':
+    main(__file__, init=False)

@@ -38,13 +38,13 @@ class DAQ_0DViewer_Keithley_Pico(DAQ_Viewer_base):
         *settings*
         ==================== ========================
     """
-    data_grabed_signal=Signal(list)
+    data_grabed_signal = Signal(list)
 
     ##checking VISA ressources
 
     from pyvisa import ResourceManager
-    VISA_rm=ResourceManager()
-    com_ports=list(VISA_rm.list_resources())
+    VISA_rm = ResourceManager()
+    com_ports = list(VISA_rm.list_resources())
 #    import serial.tools.list_ports;
 #    com_ports=[comport.device for comport in serial.tools.list_ports.comports()]
 
