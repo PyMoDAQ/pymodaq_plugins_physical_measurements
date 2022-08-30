@@ -26,6 +26,7 @@ Contributors
 
 * David Bresteau
 * Nicolas Bruyant
+* Romain Geneaux
 
 Instruments
 ===========
