@@ -2,7 +2,7 @@
 
 [plugin-info]
 SHORT_PLUGIN_NAME = 'physical_measurements'  #for instance daqmx
-package-url = 'https://github.com/CEMES-CNRS/pymodaq_plugins_physical_measurements' #to modify
+package-url = 'https://github.com/PyMoDAQ/pymodaq_plugins_physical_measurements' #to modify
 description = 'Set of PyMoDAQ plugins for various physical measurements: multimeter, lockin, oscilloscope, indus cameras...'
 
 author = 'Sébastien Weber'

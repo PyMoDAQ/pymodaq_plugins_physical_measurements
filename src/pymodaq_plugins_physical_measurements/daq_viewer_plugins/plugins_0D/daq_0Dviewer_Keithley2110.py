@@ -1,4 +1,4 @@
-from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base, comon_parameters
+from pymodaq.control_modules.viewer_utility_classes import DAQ_Viewer_base, comon_parameters
 from pymodaq.daq_utils.daq_utils import DataFromPlugins
 from easydict import EasyDict as edict
 from collections import OrderedDict

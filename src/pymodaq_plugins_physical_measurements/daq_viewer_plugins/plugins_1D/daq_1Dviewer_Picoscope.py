@@ -1,11 +1,11 @@
 from qtpy.QtCore import Slot, QThread
-from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base
+from pymodaq.control_modules.viewer_utility_classes import DAQ_Viewer_base
 import numpy as np
 from easydict import EasyDict as edict
 from ...hardware.picoscope import picoscope_5000A as picoscope
 from pymodaq.daq_utils.daq_utils import ThreadCommand, getLineInfo, DataFromPlugins, Axis
 from bitstring import BitArray
-from pymodaq.daq_viewer.utility_classes import comon_parameters
+from pymodaq.control_modules.viewer_utility_classes import comon_parameters
 
 class DAQ_1DViewer_Picoscope(DAQ_Viewer_base):
     """

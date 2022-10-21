@@ -4,7 +4,7 @@ import numpy as np
 import time
 from easydict import EasyDict as edict
 from pymodaq.daq_utils.daq_utils import ThreadCommand, getLineInfo, DataFromPlugins, Axis
-from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base, comon_parameters
+from pymodaq.control_modules.viewer_utility_classes import DAQ_Viewer_base, comon_parameters
 from pyvisa import ResourceManager
 # Import the pywin32 library, this library allow the control of other applications.
 # Used here for LeCroy.ActiveDSOCtrl.1
@@ -45,7 +45,7 @@ to be restarted) in the following cases :
 Issues
 ------
 If you see any misbehavior you can raise an issue on the github repository :
-    https://github.com/CEMES-CNRS/pymodaq_plugins_physical_measurements/issues
+    https://github.com/PyMoDAQ/pymodaq_plugins_physical_measurements/issues
 """
 
 
