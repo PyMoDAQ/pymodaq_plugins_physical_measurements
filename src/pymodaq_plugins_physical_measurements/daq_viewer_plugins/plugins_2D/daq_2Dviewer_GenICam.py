@@ -18,11 +18,11 @@ from qtpy import QtWidgets
 import numpy as np
 import ctypes
 from pymodaq.control_modules.viewer_utility_classes import DAQ_Viewer_base
-from pymodaq.daq_utils.parameter import utils as putils
+from pymodaq.utils.parameter import utils as putils
 from easydict import EasyDict as edict
 from collections import OrderedDict
-from pymodaq.daq_utils.daq_utils import ThreadCommand, getLineInfo, recursive_find_files_extension, DataFromPlugins, Axis
-from pymodaq.daq_utils.gui_utils import select_file, ListPicker
+from pymodaq.utils.daq_utils import ThreadCommand, getLineInfo, recursive_find_files_extension, DataFromPlugins, Axis
+from pymodaq.utils.gui_utils import select_file, ListPicker
 from pymodaq.control_modules.viewer_utility_classes import comon_parameters
 from harvesters.core import Harvester
 from harvesters.util.pfnc import mono_location_formats, \

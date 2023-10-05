@@ -1,5 +1,5 @@
 from pymodaq.control_modules.viewer_utility_classes import DAQ_Viewer_base, comon_parameters
-from pymodaq.daq_utils.daq_utils import DataFromPlugins
+from pymodaq.utils.daq_utils import DataFromPlugins
 from easydict import EasyDict as edict
 from collections import OrderedDict
 from ...hardware.keithley2110.keithley2110_VISADriver import Keithley2110VISADriver as Keithley2110

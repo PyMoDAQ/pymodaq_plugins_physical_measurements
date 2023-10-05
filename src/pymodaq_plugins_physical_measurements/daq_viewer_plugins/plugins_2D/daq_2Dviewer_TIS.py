@@ -11,11 +11,11 @@ from qtpy.QtCore import QThread
 from qtpy import QtWidgets
 import numpy as np
 import ctypes
-import pymodaq.daq_utils.daq_utils as mylib
+import pymodaq.utils.daq_utils as mylib
 from pymodaq.control_modules.viewer_utility_classes import DAQ_Viewer_base
 from easydict import EasyDict as edict
 from collections import OrderedDict
-from pymodaq.daq_utils.daq_utils import ThreadCommand, getLineInfo, DataFromPlugins, Axis
+from pymodaq.utils.daq_utils import ThreadCommand, getLineInfo, DataFromPlugins, Axis
 from pymodaq.control_modules.viewer_utility_classes import comon_parameters
 from ...hardware import TIS as TIS
 
